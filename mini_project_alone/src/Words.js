@@ -1,14 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import {useHistory} from "react-router"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
+import { deleteWordFB } from "./redux/modules/words";
 import { Theme, Word, Line } from "./Styled";
 
 const Words = () => {
-    const history = useHistory();
     const word_list = useSelector((state) => state.words.word);
-    console.log(word_list);  
+    // console.log(word_list[0].id);
+    // console.log(props);  
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -16,10 +19,18 @@ const Words = () => {
         <Container>
             {word_list.map((val, idx) => {
                 return (
-                    <WordCard key={idx}>
-                        <Word>
-                            단어
-                        </Word>
+                    <WordCard key={idx} onClick={() => {
+                        history.push("/editword/" + idx);
+                    }}>
+                        <ThemeContainer>
+                            <Word>
+                                단어
+                            </Word>
+                            <DeleteBtn onClick={(e) => {
+                                e.stopPropagation();
+                                dispatch(deleteWordFB(word_list[idx].id));
+                            }} >✖</DeleteBtn>
+                        </ThemeContainer>
                         <Explain>
                             {val.word}
                         </Explain>
@@ -60,9 +71,24 @@ const Container = styled.div`
 
 const WordCard = styled.div`
     width: 300px;
-    height: 160px;
+    height: 170px;
     margin: 5px 0px;
     background-color: orange;
+`;
+
+const ThemeContainer = styled.div`
+    display: flex;
+    justify-content: space-between; 
+`;
+
+const DeleteBtn = styled.button`
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    border: 1px solid red;
+    border-radius: 50%;
+    background-color: red;
+    cursor: pointer;
 `;
 
 const Explain = styled.div`
