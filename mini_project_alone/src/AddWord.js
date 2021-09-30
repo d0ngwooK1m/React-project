@@ -37,7 +37,9 @@ const AddWord = () => {
                 }}>돌아가기</AddWordBtn>
                 <AddWordBtn onClick={() => {
                     dispatch(createWordFB({ word: word.current.value, explain: explain.current.value, example: example.current.value}));
-                    window.location.replace("/");
+                    // window.location.replace("/");
+                    console.log("pass onClick");
+                    history.push("/");
                 }}>추가하기</AddWordBtn>
             </div>
         </Container>

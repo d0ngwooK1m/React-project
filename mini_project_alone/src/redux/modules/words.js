@@ -58,6 +58,7 @@ export const loadWordFB = () => {
 
 export const createWordFB = (word) => {
     return async function(dispatch) {
+        console.log("pass Firebase");
         await addDoc(collection(db, "words"), word);
 
         const word_data = {
@@ -65,7 +66,7 @@ export const createWordFB = (word) => {
             explain: word.explain,
             example: word.example
         }
-
+        console.log("Pass createWordFB");
         dispatch(createWord(word_data));
     }
 };
