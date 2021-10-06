@@ -24,7 +24,6 @@ const Button = (props) => {
 
 Button.defaultProps = {
     width: "100%",
-    height: "40px",
     color: "white",
     backgroundColor: "black",
     text: "text",
@@ -33,12 +32,14 @@ Button.defaultProps = {
 }
 
 const Btn = styled.button`
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
-    color: ${(props) => props.color};
-    comment: ${(props) => props.comment};
-    background-color: ${(props) => props.backgroundColor};
-
+    width: ${props => props.width};
+    height: 40px;
+    color: ${props => props.color};
+    comment: ${props => props.comment};
+    border-radius: ${props => props.borderRadius};
+    background-color: ${props => props.backgroundColor};
+    box-sizing: border-box;
+    cursor: pointer;
 `;
 
 export default Button;
