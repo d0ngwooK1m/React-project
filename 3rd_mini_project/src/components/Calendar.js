@@ -4,7 +4,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+
 
 import { Detail } from ".";
 
@@ -15,8 +15,7 @@ const Calendar = (props) => {
     const todo = useSelector(state => state.todo.todo);
     const [newTodo, setNewTodo] = React.useState(todo);
     const watch_done = useSelector(state => state.todo.watch_done);
-    console.log(watch_done);
-    const history = useHistory();
+    // console.log(watch_done);
     // console.log(todo);
     const [modal, setModal] = React.useState(false);
     const [title, setTitle] = React.useState();
@@ -76,6 +75,8 @@ const Calendar = (props) => {
         </React.Fragment>
     );
 };
+
+
 
 
 export default Calendar

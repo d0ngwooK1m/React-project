@@ -72,7 +72,7 @@ const Page = (props) => {
                             // console.log(todo);
                             // console.log(date);
                             sendTodo();
-                            history.replace("/");
+                            history.push("/");
                         }}
                     >
                         작성완료

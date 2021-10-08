@@ -25,7 +25,7 @@ const Button = (props) => {
 Button.defaultProps = {
     width: "100%",
     color: "white",
-    backgroundColor: "black",
+    backgroundColor: "#81BEF7",
     text: "text",
     borderRadius: "0px",
     _onClick: () => { },

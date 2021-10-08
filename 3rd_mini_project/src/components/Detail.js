@@ -1,15 +1,12 @@
 import React from "react";
 
 import { Grid, Text, Button } from "../elements";
-import todo, { actionCreators as todoActions } from "../redux/modules/todo";
+import { actionCreators as todoActions } from "../redux/modules/todo";
 
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { createAction } from "redux-actions";
 
 const Detail = ({ closeModal, title, date, id }) => {
-    const history = useHistory();
     const dispatch = useDispatch();
     // const todo = useSelector(state => state.todo.todo);
     // console.log(todo);
@@ -25,82 +22,101 @@ const Detail = ({ closeModal, title, date, id }) => {
                 is_align="center"
                 z_index="999"
                 position
+                _onClick={() => {
+                    closeModal(false);
+                }}
             >
-                <Grid
-                    flex="flex"
-                    width="500px"
-                    height="500px"
-                    flex_direction="column"
-                    is_align="center"
-                    is_justify="space-between"
-                    backgroundColor="cyan"
-                    margin="0px auto"
-                >
-                    <Grid
-                        width="500px"
-                    >
-                        <Grid
-                            flex="flex"
-                            width="500px"
-                            is_justify="end"
-                        >
-                            <Button
-                                width="50px"
-                                _onClick={() => {
-                                    closeModal(false);
-                                }}
-                            >✖</Button>
-                        </Grid>
-                        <Text
-                            label={"일정내용"}
-                            size="30px"
-                            bold
-                        >
-                            {title}
-                        </Text>
-                    </Grid>
-                    <Grid
-                        width="500px"
-                    >
-                        <Text
-                            label={"일시"}
-                            size="30px"
-                            bold
-                        >
-                            {date}
-                        </Text>
-                    </Grid>
-
+                <StyleWrapper>
                     <Grid
                         flex="flex"
+                        width="100%"
+                        height="100%"
+                        flex_direction="column"
+                        is_align="center"
                         is_justify="space-between"
-                        width="500px"
+                        margin="0px auto"
+                        _onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+
                     >
-                        <Button
-                            width="200px"
-                            _onClick={() => {
-                                dispatch(todoActions.deleteTodoFB(id));
-                                closeModal(false);
-                            }}
+                        <Grid
+                            width="100%"
                         >
-                            할일삭제
-                        </Button>
-                        <Button
-                            width="200px"
-                            _onClick={() => {
-                                dispatch(todoActions.doneTodoFB(id));
-                                closeModal(false);
-                            }}
+                            <Grid
+                                flex="flex"
+                                width="100%"
+                                is_justify="end"
+                            >
+                                <Button
+                                    width="20%"
+                                    _onClick={() => {
+                                        closeModal(false);
+                                    }}
+                                >✖</Button>
+                            </Grid>
+                            <Text
+                                label={"일정내용"}
+                                size="30px"
+                                bold
+                            >
+                                {title}
+                            </Text>
+                        </Grid>
+                        <Grid
+                            width="100%"
                         >
-                            할일완료
-                        </Button>
+                            <Text
+                                label={"일시"}
+                                size="30px"
+                                bold
+                            >
+                                {date}
+                            </Text>
+                        </Grid>
+
+                        <Grid
+                            flex="flex"
+                            is_justify="space-between"
+                            width="100%"
+                        >
+                            <Button
+                                width="30%"
+                                _onClick={() => {
+                                    dispatch(todoActions.deleteTodoFB(id));
+                                    closeModal(false);
+                                }}
+                            >
+                                할일삭제
+                            </Button>
+                            <Button
+                                width="30%"
+                                _onClick={() => {
+                                    dispatch(todoActions.doneTodoFB(id));
+                                    closeModal(false);
+                                }}
+                            >
+                                할일완료
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </StyleWrapper>
             </Grid>
         </React.Fragment>
     );
 
 };
 
+const StyleWrapper = styled.div`
+    background-image: url("https://banner2.cleanpng.com/20180224/oiw/kisspng-airplane-airliner-aircraft-boeing-777-airbus-aircraft-5a91fde55e6c87.8260020815195171573868.jpg");
+    background-color: #E0F2F7;
+    background-size: contain;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    @media screen and (max-width: 500px) {
+        width: 100vw;
+    }
+`;
 
 export default Detail;
